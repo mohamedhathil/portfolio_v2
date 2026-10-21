@@ -178,6 +178,26 @@ document.querySelectorAll('.tilt,#ph').forEach((el) => {
   nav.appendChild(ind);
   nav.appendChild(bolt);
 
+  /* mobile menu */
+  var burger = nav.querySelector('.burger');
+  var menu = nav.querySelector('#menu');
+  function toggleMenu(open) {
+    menu.classList.toggle('open', open);
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  }
+  burger.addEventListener('click', function () {
+    toggleMenu(!menu.classList.contains('open'));
+  });
+  links.forEach(function (a) {
+    a.addEventListener('click', function () {
+      toggleMenu(false);
+    });
+  });
+  addEventListener('resize', function () {
+    if (innerWidth > 760) toggleMenu(false);
+  });
+
   var secs = links.map(function (a) {
     return document.querySelector(a.getAttribute('href'));
   });
